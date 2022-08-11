@@ -1,4 +1,5 @@
 # vuejs_cli_prjct01
+<h2>A small learning project from the course</h2>
 
 ## Project setup
 ```
