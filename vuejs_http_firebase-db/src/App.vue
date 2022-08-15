@@ -77,8 +77,23 @@ export default {
       }
     },
     async removeUser(id) {
-      await axios.delete(`https://vuejs-with-http-learn-default-rtdb.europe-west1.firebasedatabase.app/users/${id}.json`)
-      this.users = this.users.filter(user => user.id !== id)
+      try {
+        const user = this.users.find(person => person.id === id).firstName
+        await axios.delete(`https://vuejs-with-http-learn-default-rtdb.europe-west1.firebasedatabase.app/users/${id}.json`)
+        this.users = this.users.filter(user => user.id !== id)
+        this.alert = {
+          type: 'primary',
+          title: 'Успешно',
+          text: `Пользователь "${user}" был удален`
+        }
+      } catch (e) {
+        this.alert = {
+          type: 'danger',
+          title: 'Ошибка!',
+          text: `Пользователь не был удален`
+        }
+      }
+
     }
   },
   components: { AppUsersList, AppAlert }
