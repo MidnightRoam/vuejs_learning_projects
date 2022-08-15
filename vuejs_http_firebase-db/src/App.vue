@@ -11,7 +11,11 @@
 
       <button class="btn primary" :disabled="name.length === 0">Создать человека</button>
     </form>
+
+    <app-loader v-if="loading"></app-loader>
+
     <app-users-list
+        v-else
         :users="users"
         @load="loadUsers"
         @remove="removeUser"
@@ -22,6 +26,7 @@
 <script>
 import AppUsersList from "@/components/AppUsersList";
 import AppAlert from "@/components/AppAlert";
+import AppLoader from "@/components/AppLoader";
 import axios from 'axios'
 
 export default {
@@ -29,7 +34,8 @@ export default {
     return {
       name: '',
       users: [],
-      alert: null
+      alert: null,
+      loading: false
     }
   },
   mounted() {
@@ -57,6 +63,7 @@ export default {
     },
     async loadUsers() {
       try {
+        this.loading = true
         const {data} = await axios.get('https://vuejs-with-http-learn-default-rtdb.europe-west1.firebasedatabase.app/users.json')
         if (!data) {
           throw new Error('Список людей пуст')
@@ -67,12 +74,14 @@ export default {
             ...data[key] // или firstName: data[key].firstName
           }
         })
+        this.loading = false
       } catch (e) {
         this.alert = {
           type: 'danger',
           title: 'Ошибка!',
           text: e.message
         }
+        this.loading = false
         console.log(e.message)
       }
     },
@@ -96,7 +105,7 @@ export default {
 
     }
   },
-  components: { AppUsersList, AppAlert }
+  components: { AppUsersList, AppAlert, AppLoader }
 }
 </script>
 
