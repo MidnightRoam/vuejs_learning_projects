@@ -13,6 +13,7 @@
     <app-users-list
         :users="users"
         @load="loadUsers"
+        @remove="removeUser"
     ></app-users-list>
   </div>
 </template>
@@ -28,6 +29,9 @@ export default {
       users: []
     }
   },
+  mounted() {
+    this.loadUsers()
+  },
   methods: {
     async createPerson() {
        const response = await fetch('https://vuejs-with-http-learn-default-rtdb.europe-west1.firebasedatabase.app/users.json', {
@@ -42,7 +46,10 @@ export default {
 
       const firebaseData = await response.json() // ждем получения данных от сервера
 
-      console.log(firebaseData)
+      this.users.push({
+        firstName: this.name,
+        id: firebaseData.name
+      })
       this.name = ''
     },
     async loadUsers() {
@@ -53,6 +60,10 @@ export default {
           ...data[key] // или firstName: data[key].firstName
         }
       })
+    },
+    async removeUser(id) {
+      await axios.delete(`https://vuejs-with-http-learn-default-rtdb.europe-west1.firebasedatabase.app/users/${id}.json`)
+      this.users = this.users.filter(user => user.id !== id)
     }
   },
   components: { AppUsersList }

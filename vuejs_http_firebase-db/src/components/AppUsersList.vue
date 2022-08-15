@@ -1,7 +1,8 @@
 <template>
   <div v-if="users.length !== 0">
-    <div class="card" v-for="user in users" :key="user.id">
+    <div class="card inline" v-for="user in users" :key="user.id">
       <h3>{{ user.firstName }}</h3>
+      <buttond class="btn danger" @click="$emit('remove', user.id)">Удалить</buttond>
     </div>
   </div>
   <div class="card center" v-else>
@@ -13,11 +14,15 @@
 <script>
 export default {
   name: "AppUsersList",
-  emits: ['load'],
+  emits: ['load', 'remove'],
   props: ['users']
 }
 </script>
 
 <style scoped>
-
+  .inline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 </style>
