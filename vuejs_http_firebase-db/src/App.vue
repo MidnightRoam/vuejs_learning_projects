@@ -19,6 +19,7 @@
 
 <script>
 import AppUsersList from "@/components/AppUsersList";
+import axios from 'axios'
 
 export default {
   data() {
@@ -37,12 +38,21 @@ export default {
         body: JSON.stringify({
           firstName: this.name
         })
-      }) // отправляем данные на сервер
+      }) // отправляем данные на сервер. Fetch возвращает промис.
 
       const firebaseData = await response.json() // ждем получения данных от сервера
 
       console.log(firebaseData)
       this.name = ''
+    },
+    async loadUsers() {
+      const {data}= await axios.get('https://vuejs-with-http-learn-default-rtdb.europe-west1.firebasedatabase.app/users.json')
+      this.users = Object.keys(data).map(key => {
+        return {
+          id: key,
+          ...data[key] // или firstName: data[key].firstName
+        }
+      })
     }
   },
   components: { AppUsersList }

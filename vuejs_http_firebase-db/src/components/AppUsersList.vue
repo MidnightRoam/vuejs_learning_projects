@@ -1,7 +1,7 @@
 <template>
-  <div v-if="users.length != 0">
-    <div class="card" v-for="user in users" :key="user">
-      <h3>{{ user }}</h3>
+  <div v-if="users.length !== 0">
+    <div class="card" v-for="user in users" :key="user.id">
+      <h3>{{ user.firstName }}</h3>
     </div>
   </div>
   <div class="card center" v-else>
