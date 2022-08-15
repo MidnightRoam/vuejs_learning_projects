@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <app-alert :alert="alert" @close="alert = null"></app-alert>
     <form class="card" @submit.prevent="createPerson">
       <h2>Работа с базой данных</h2>
 
@@ -20,13 +21,15 @@
 
 <script>
 import AppUsersList from "@/components/AppUsersList";
+import AppAlert from "@/components/AppAlert";
 import axios from 'axios'
 
 export default {
   data() {
     return {
       name: '',
-      users: []
+      users: [],
+      alert: null
     }
   },
   mounted() {
@@ -53,20 +56,32 @@ export default {
       this.name = ''
     },
     async loadUsers() {
-      const {data}= await axios.get('https://vuejs-with-http-learn-default-rtdb.europe-west1.firebasedatabase.app/users.json')
-      this.users = Object.keys(data).map(key => {
-        return {
-          id: key,
-          ...data[key] // или firstName: data[key].firstName
+      try {
+        const {data} = await axios.get('https://vuejs-with-http-learn-default-rtdb.europe-west1.firebasedatabase.app/users.json')
+        if (!data) {
+          throw new Error('Список людей пуст')
         }
-      })
+        this.users = Object.keys(data).map(key => {
+          return {
+            id: key,
+            ...data[key] // или firstName: data[key].firstName
+          }
+        })
+      } catch (e) {
+        this.alert = {
+          type: 'danger',
+          title: 'Ошибка!',
+          text: e.message
+        }
+        console.log(e.message)
+      }
     },
     async removeUser(id) {
       await axios.delete(`https://vuejs-with-http-learn-default-rtdb.europe-west1.firebasedatabase.app/users/${id}.json`)
       this.users = this.users.filter(user => user.id !== id)
     }
   },
-  components: { AppUsersList }
+  components: { AppUsersList, AppAlert }
 }
 </script>
 
