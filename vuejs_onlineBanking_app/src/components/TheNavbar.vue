@@ -1,13 +1,13 @@
 <template>
   <nav class="navbar">
-    <h3>Online banking</h3>
+    <h3>Chrono | Online Banking</h3>
 
     <ul class="navbar-menu">
       <li>
         <router-link to="/">Заявки</router-link>
       </li>
       <li>
-        <router-link to="/">Помощь</router-link>
+        <router-link to="/help">Помощь</router-link>
       </li>
       <li>
         <a href="#">Сообщения</a>
