@@ -16,8 +16,8 @@
       <td>{{ index + 1 }}</td>
       <td>{{ request.fio }}</td>
       <td>{{ request.phone }}</td>
-      <td>{{ request.amount }}</td>
-      <td>{{ request.status }}</td>
+      <td>{{ currency(request.amount) }}</td>
+      <td><AppStatus :type="request.status" /></td>
       <td>
 <!--        <router-link v-slot="{navigate}" custom :to="{name: 'Request', params: {id: request.id}}">-->
 <!--          <button class="btn primary" @click="navigate">Открыт</button>-->
@@ -29,9 +29,16 @@
 </template>
 
 <script>
+import {currency} from "@/utils/currency";
+import AppStatus from "@/components/ui/AppStatus";
+
 export default {
   name: "RequestTable",
-  props: ['requests']
+  props: ['requests'],
+  setup () {
+    return {currency}
+  },
+  components: {AppStatus}
 }
 </script>
 
