@@ -7,7 +7,9 @@
     <request-table :requests="[]"></request-table>
 
     <teleport to="body">
-      <app-modal v-if="modal" title="Создать заявку" @close="modal = false"></app-modal>
+      <app-modal v-if="modal" title="Создать заявку" @close="modal = false">
+        <request-modal @created="modal = false" />
+      </app-modal>
     </teleport>
   </app-page>
 </template>
@@ -17,9 +19,12 @@ import {ref} from "vue";
 import AppPage from "@/components/ui/AppPage";
 import RequestTable from "@/components/request/RequestTable";
 import AppModal from "@/components/ui/AppModal";
+import RequestModal from "@/components/request/RequestModal";
 export default {
   name: 'HomePage',
-  components: {AppPage, RequestTable, AppModal},
+  components: {
+    AppPage, RequestTable, AppModal, RequestModal
+  },
   setup() {
     const modal = ref(false)
 
