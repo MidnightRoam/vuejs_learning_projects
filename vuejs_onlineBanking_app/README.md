@@ -3,7 +3,7 @@
 ### Email: user@test.com
 ### Password: 123456
 
-
+<hr>
 
 ## Project setup
 ```
