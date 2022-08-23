@@ -1,4 +1,7 @@
-<h1><a href="https://vuejs-online-banking.web.app">The application is deployed on Firebase hosting.</a></h1>
+#<a href="https://vuejs-online-banking.web.app">The application is deployed on Firebase hosting.</a>
+## Login data for a test account to get acquainted with the project:
+### Email: user@test.com
+### Password: 123456
 
 
 
