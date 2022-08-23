@@ -1,4 +1,7 @@
-# vuejs_practice_app
+<h2>The application is deployed on Firebase hosting.</h2>
+<h2>Link to hosted application:</h2>
+<a href="https://vuejs-online-banking.web.app">App</a>
+
 
 ## Project setup
 ```
