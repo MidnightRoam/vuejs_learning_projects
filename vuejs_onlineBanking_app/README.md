@@ -1,4 +1,4 @@
-<a href="https://vuejs-online-banking.web.app">The application is deployed on Firebase hosting.</a>
+<h1><a href="https://vuejs-online-banking.web.app">The application is deployed on Firebase hosting.</a></h1>
 
 
 
