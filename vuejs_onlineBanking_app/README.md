@@ -1,6 +1,5 @@
-<h2>The application is deployed on Firebase hosting.</h2>
-<h2>Link to hosted application:</h2>
-<a href="https://vuejs-online-banking.web.app">App</a>
+<a href="https://vuejs-online-banking.web.app">The application is deployed on Firebase hosting.</a>
+
 
 
 ## Project setup
